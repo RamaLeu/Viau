@@ -1,11 +1,11 @@
 const express = require('express');
 
 const {
-	addOrder
+	addOrder, getAllOrders, confirmOrder
 } = require('./../controllers/orderController');
 
 const router = express.Router();
 
-router.route('/').post(addOrder);
+router.route('/').post(addOrder).get(getAllOrders).patch(confirmOrder);
 
 module.exports = router;

@@ -31,6 +31,7 @@ const Order = (props) => {
             adress: adress,
             method: method,
             total: total,
+            confirmed: false
 
         };
         const postURL = 'http://localhost:3001/api/v1/8d59e57a-6b8f-4a54-b585-2e2c3edcd3ea/order';

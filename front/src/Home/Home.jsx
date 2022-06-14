@@ -7,6 +7,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
 import Cart from '../Cart/Cart';
 import Order from '../Order/Order';
+import AdminOrders from '../Admin/AdminOrders';
+import AdminFood from '../Admin/AdminFood';
+import AdminPlaces from '../Admin/AdminPlaces';
 
 const Home = (props) => {
   let [currentPage ,setCurrentPage] = useState("main");
@@ -51,8 +54,10 @@ function removeFromCart(itemId){
 
   return (
     <div className='homePage'>
+      {props.currentUser.type =="user"&& 
       <div className='homeSidebar'>
         <div className='homeSidebarLeft'>
+          <div>
           <div className='homeSidebarBtn'>
           <button onClick={()=>{setCurrentPage("main")}}>Pagrindinis puslapis</button>
           </div>
@@ -73,14 +78,34 @@ function removeFromCart(itemId){
           <div className='homeSidebarBtn'>
           <button onClick={()=>{props.logout()}}>Atsijungti</button>
           </div>
+          </div>
         </div>
         <div className='homeSidebarRight'>
           <div className='homeSidebarCartBtn'>
             <button onClick={()=>{setCurrentPage("cart")}}><FontAwesomeIcon icon={faCartShopping} /></button>
           </div>
         </div>
+      </div>}
+      {props.currentUser.type =="admin"&&
+      <div className='homeSidebar'>
+      <div className='homeSidebarLeft'>
+        <div>
+        <div className='homeSidebarBtn'>
+        <button onClick={()=>{setCurrentPage("adminOrders")}}>Užsakymai</button>
+        </div>
+        <div className='homeSidebarBtn'>
+        <button onClick={()=>{setCurrentPage("adminFood")}}>Patiekalai</button>
+        </div>
+        <div className='homeSidebarBtn'>
+        <button onClick={()=>{setCurrentPage("adminPlaces")}}>Vietos</button>
+        </div>
+        <div className='homeSidebarBtn'>
+        <button onClick={()=>{props.logout()}}>Atsijungti</button>
+        </div>
+        </div>
       </div>
-      {!isLoading ? 
+    </div>}
+      {!isLoading && props.currentUser.type ==="user" ? 
       <div className='homeMain'>
         {currentPage==="main"&&
         <div>Main page</div>}
@@ -100,7 +125,15 @@ function removeFromCart(itemId){
         <SingleItem currentItem={currentItem} currentUser={props.currentUser} addToCart={addToCart}/>}
         {currentPage==="checkout"&&
         <Order cart={cart} setCurrentPage={setCurrentPage}/>}
-      </div>:<div></div>}
+      </div>:
+      <div className='homeMain'>
+        {currentPage ==="adminOrders"&&
+        <AdminOrders/>}
+        {currentPage ==="adminFood"&&
+        <AdminFood/>}
+        {currentPage ==="adminPlaces"&&
+        <AdminPlaces/>}
+      </div>}
     </div>
   )
 }

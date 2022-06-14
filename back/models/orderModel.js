@@ -18,6 +18,9 @@ const orderSchema = new mongoose.Schema({
     },
     total:{
         type: Number
+    },
+    confirmed:{
+        type: Boolean,
     }
 
 

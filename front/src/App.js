@@ -52,7 +52,7 @@ function App() {
         </nav>}
         <Routes>
           <Route path="/" element={currentUser ? <Home setCurrentUser={setCurrentUser} logout={logout}/>: <Navigate to="/Login"/>}></Route>
-          <Route path="/Home" element={currentUser ? <Home setCurrentUser={setCurrentUser} logout={logout}/>: <Navigate to="/Login"/>}>
+          <Route path="/Home" element={currentUser ? <Home setCurrentUser={setCurrentUser} currentUser={currentUser} logout={logout}/>: <Navigate to="/Login"/>}>
           </Route>
           <Route path="/Register" element={ !currentUser ? <Register setCurrentUser={setCurrentUser} currentUser={currentUser}/>: <Navigate to="/Home"/>}>
           </Route>
