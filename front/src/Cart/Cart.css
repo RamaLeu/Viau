@@ -1,0 +1,23 @@
+.cartPage{
+    width: 100%;
+    background-color: teal;
+    height: 100%;
+}
+.cartItemList{
+    display: flex;
+    flex-direction: column;
+    margin-top: 2%;
+}
+.cartSingleItem{
+    display: flex;
+    padding: 1%;
+    border: 1px solid black;
+    justify-content: flex-start;
+    align-items: center;
+}
+.cartSingleInfo{
+    width: 70%;
+}
+.cartSingleRemove{
+    width: 30%;
+}

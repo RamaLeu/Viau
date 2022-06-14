@@ -1,0 +1,10 @@
+.itemFullList{
+    display: flex;
+}
+.foodItem{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+    margin: 2%;
+    padding: 1%;
+}

@@ -1,0 +1,11 @@
+.placesSinglePlace{
+    border: 1px solid black;
+    width: 28%;
+    margin: 1%;
+}
+.placesSingleName{
+    font-weight: 800;
+}
+.placesSingleAdress{
+    font-size: small;
+}
