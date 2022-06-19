@@ -19,7 +19,7 @@ const menuSchema = new mongoose.Schema({
     placeId:{
         type: String,
     },
-    Img_Url:{
+    img_url:{
         type:String,
     }
 

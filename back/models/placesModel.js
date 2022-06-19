@@ -9,6 +9,9 @@ const placeSchema = new mongoose.Schema({
     },
     rating:{
         type: String,
+    },
+    imgUrl:{
+        type: String,
     }
 
 });

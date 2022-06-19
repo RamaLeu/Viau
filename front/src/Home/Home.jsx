@@ -4,12 +4,13 @@ import Places from '../Places/Places';
 import SingleItem from '../SingleItem/SingleItem';
 import './Home.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
+import { faCartShopping, faCheck } from '@fortawesome/free-solid-svg-icons';
 import Cart from '../Cart/Cart';
 import Order from '../Order/Order';
 import AdminOrders from '../Admin/AdminOrders';
 import AdminFood from '../Admin/AdminFood';
 import AdminPlaces from '../Admin/AdminPlaces';
+import SinglePlace from '../SinglePlace/SinglePlace';
 
 const Home = (props) => {
   let [currentPage ,setCurrentPage] = useState("main");
@@ -17,12 +18,39 @@ const Home = (props) => {
   let [isLoading, setIsLoading] = useState(true);
   let [items, setItems] = useState([]);
   let [tempItems, setTempItems] = useState([]);
+  let [singlePickedPlace, setSinglePlace] = useState("");
   let [cart, setCart] = useState([]);
+  let [addingAnim, setAddingAnim] = useState(false);
 
   function addToCart(itemId){
     let tempCart = [...cart];
-    tempCart.push(itemId);
+    let isInCart = false;
+    let itemData = {
+      _id: itemId._id,
+      name: itemId.name,
+      price: itemId.price,
+      place: itemId.place,
+      img_url: itemId.img_url,
+      count: 1,
+    };
+    if (tempCart.length >0){
+      tempCart.forEach((item)=>{
+        console.log(item._id);
+        console.log(itemId._id);
+        if (item._id === itemId._id){
+          item.count += 1;
+          isInCart = true;
+        }
+      });
+    }else{
+      tempCart.push(itemData);
+      isInCart = true;
+    }
+    if(!isInCart){
+      tempCart.push(itemData);
+    }
     setCart(tempCart);
+    setAddingAnim(true);
 }
 function removeFromCart(itemId){
   let tempCart = [...cart];
@@ -30,18 +58,35 @@ function removeFromCart(itemId){
     if (item._id === itemId){
       tempCart.splice(index, 1);
     }
-  setCart(tempCart)
+  setCart(tempCart);
   });
+  
+}
+
+function removeCartAnim(){
+  setAddingAnim(false);
+  /* setAddingAnim(false); */
 }
 
   useEffect(() => {
+    if(addingAnim){
+      setTimeout(removeCartAnim, 1000);
+    }
+  }, [addingAnim]);
+  
+
+  function fetchItems(){
     fetch('//localhost:3001/api/v1/8d59e57a-6b8f-4a54-b585-2e2c3edcd3ea/menu')
-        .then(response => response.json())
-        .then(data => {
-            setIsLoading(false);
-            setItems(data.places);
-            setTempItems(data.places);
-        });
+    .then(response => response.json())
+    .then(data => {
+        setIsLoading(false);
+        setItems(data.places);
+        setTempItems(data.places);
+    });
+  }
+
+  useEffect(() => {
+    fetchItems();
   }, []);
   
   function singularItem(item){
@@ -52,11 +97,19 @@ function removeFromCart(itemId){
 
   }
 
+  function singlePlace(place){
+    setIsLoading(true);
+    setSinglePlace(place);
+    setCurrentPage("singlePlace");
+    setIsLoading(false);
+  }
+
   return (
     <div className='homePage'>
       {props.currentUser.type =="user"&& 
       <div className='homeSidebar'>
         <div className='homeSidebarLeft'>
+          <span className='sidebarTitle'>VIAU</span>
           <div>
           <div className='homeSidebarBtn'>
           <button onClick={()=>{setCurrentPage("main")}}>Pagrindinis puslapis</button>
@@ -80,15 +133,11 @@ function removeFromCart(itemId){
           </div>
           </div>
         </div>
-        <div className='homeSidebarRight'>
-          <div className='homeSidebarCartBtn'>
-            <button onClick={()=>{setCurrentPage("cart")}}><FontAwesomeIcon icon={faCartShopping} /></button>
-          </div>
-        </div>
       </div>}
       {props.currentUser.type =="admin"&&
       <div className='homeSidebar'>
       <div className='homeSidebarLeft'>
+      <span className='sidebarTitle'>VIAU</span>
         <div>
         <div className='homeSidebarBtn'>
         <button onClick={()=>{setCurrentPage("adminOrders")}}>Užsakymai</button>
@@ -97,7 +146,7 @@ function removeFromCart(itemId){
         <button onClick={()=>{setCurrentPage("adminFood")}}>Patiekalai</button>
         </div>
         <div className='homeSidebarBtn'>
-        <button onClick={()=>{setCurrentPage("adminPlaces")}}>Vietos</button>
+        <button onClick={()=>{setCurrentPage("adminPlaces")}}>Įstaigos</button>
         </div>
         <div className='homeSidebarBtn'>
         <button onClick={()=>{props.logout()}}>Atsijungti</button>
@@ -107,10 +156,13 @@ function removeFromCart(itemId){
     </div>}
       {!isLoading && props.currentUser.type ==="user" ? 
       <div className='homeMain'>
+        <div className={addingAnim ? "homeSidebarCartBtnBiggened" : "homeSidebarCartBtn"}>
+            <button onClick={()=>{setCurrentPage("cart")}}><FontAwesomeIcon icon={!addingAnim ? faCartShopping : faCheck} /></button>
+          </div>
         {currentPage==="main"&&
         <div>Main page</div>}
         {currentPage==="places"&&
-        <Places/>}
+        <Places singlePlace={singlePlace}/>}
         {currentPage==="breakfast"&&
         <Items items={items} menuType={"breakfast"} singularItem={singularItem} addToCart={addToCart}/>}
         {currentPage==="lunch"&&
@@ -125,6 +177,8 @@ function removeFromCart(itemId){
         <SingleItem currentItem={currentItem} currentUser={props.currentUser} addToCart={addToCart}/>}
         {currentPage==="checkout"&&
         <Order cart={cart} setCurrentPage={setCurrentPage}/>}
+        {currentPage==="singlePlace"&&
+        <SinglePlace pickedPlace={singlePickedPlace} items={items} singularItem={singularItem} addToCart={addToCart}/>}
       </div>:
       <div className='homeMain'>
         {currentPage ==="adminOrders"&&

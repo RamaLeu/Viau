@@ -1,0 +1,52 @@
+.singlePlaceItemCard{
+    width: 20%;
+    height: 20%;
+}
+.itemCardImage{
+    width: 100%;
+    height: 20%;
+}
+.itemCardImage img{
+    width: 100%;
+    height: 100%;
+}
+.singlePlaceTitle{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    font-size: 3em;
+    font-weight: 600;
+}
+.singlePlaceImage{
+    display: flex;
+    width: 100%;
+    border-top: 1px solid black;
+}
+.singlePlaceImage img{
+    width: 50%;
+    height: 50%;
+    margin: 2%;
+    box-sizing: border-box;
+    border-radius: 6px;
+}
+.singlePlaceDesc{
+    width: 50%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.singlePlaceItems{
+    display: flex;
+    border-top: 1px solid black;
+}
+.placeFoodItem{
+    width: 20%;
+    height: 20%;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid black;
+    align-items: center;
+    margin: 2%;
+    border-radius: 6px;
+}

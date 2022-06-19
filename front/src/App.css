@@ -1,38 +1,86 @@
-.App {
+#root, html, body{
+  height: 100%;
+  background-color: #34ad55;
+}
+.App{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+.Main{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.MainNav{
+  display: flex;
+  width: 30%;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.MainNav a{
+  text-decoration: none;
+  background-color: #3C5A14;
+  color: #230007;
+  padding: 4%;
+  border-radius: 6px;
   text-align: center;
+  margin: 1%;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.MainTitle{
+  font-size: 6em;
+  font-weight: 800;
+  color: #230007;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.NavBtns{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.MainNav a:hover{
+  background-color: #9cafb7;
+  color: #230007;
+}
+.authPage{
+  width: 30%;
+}
+.authForm{
+  width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
 }
-
-.App-link {
-  color: #61dafb;
+.authForm input{
+  padding: 2%;
+  border-radius: 6px;
+  border: none;
+  margin-top: 2%;
+  margin-bottom: 2%;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.rememberLine{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.roundedBtn{
+  text-decoration: none;
+  background-color: #3C5A14;
+  border: none;
+  color: #230007;
+  padding: 4%;
+  border-radius: 6px;
+  text-align: center;
+  margin: 1%;
+}
+.roundedBtn:hover{
+  background-color: #9cafb7;
+  cursor: pointer;
+  color: #230007;
 }

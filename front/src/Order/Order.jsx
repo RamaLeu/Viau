@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-
+import './Order.css';
 const Order = (props) => {
     let [name, setName] = useState("");
     let [surname, setSurname] = useState("");
@@ -14,7 +14,11 @@ const Order = (props) => {
         let tempTotal = 0;
         setCart(props.cart);
         props.cart.forEach((item)=>{
-            tempTotal += +item.price;
+            if (item.count > 0){
+                tempTotal += +item.price * item.count;
+            }else{
+                tempTotal += +item.price;
+            }
         });
         setTotal(tempTotal);
         console.log(tempTotal);
@@ -30,7 +34,7 @@ const Order = (props) => {
             items: cart,
             adress: adress,
             method: method,
-            total: total,
+            total: total.toFixed(2),
             confirmed: false
 
         };
@@ -50,22 +54,22 @@ const Order = (props) => {
 
     }
   return (
-    <div>
-        <div>
-            Iš viso:
-            {total}€
+    <div className='orderPage'>
+        <div className='orderTotalPrice'>
+            <span>Iš viso:</span>
+            <span>{total.toFixed(2)}€</span>
         </div>
-        <form onSubmit={(e)=>{submitOrder(e)}}>
-            <input type="text" placeholder='Vardas' onChange={(e)=>{setName(e.target.value)}}></input>
-            <input type="text" placeholder='Pavarde' onChange={(e)=>{setSurname(e.target.value)}}></input>
-            <input type="number" placeholder='Tel. Numeris' onChange={(e)=>{setNumber(e.target.value)}}></input>
-            <input type="text" placeholder='Adresas' onChange={(e)=>{setAdress(e.target.value)}}></input>
+        <form onSubmit={(e)=>{submitOrder(e)}} className="orderForm">
+            <input type="text" placeholder='Vardas' onChange={(e)=>{setName(e.target.value)}} required></input>
+            <input type="text" placeholder='Pavarde' onChange={(e)=>{setSurname(e.target.value)}}required></input>
+            <input type="number" placeholder='Tel. Numeris' onChange={(e)=>{setNumber(e.target.value)}}required></input>
+            <input type="text" placeholder='Adresas' onChange={(e)=>{setAdress(e.target.value)}}required></input>
 
             <select onChange={(e)=>{setMethod(e.target.value)}}>
                 <option value="cash">Grynais</option>
                 <option value="card">Kortele</option>
             </select>
-            <input type="submit" value="Užsakyti"></input>
+            <input type="submit" value="Užsakyti" className='orderConfirmBtn'></input>
         </form>
     </div>
   )

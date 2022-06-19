@@ -7,6 +7,7 @@ const Register = (props) => {
     let [repeatPass, setRepeatPass] = useState("");
 
     function registerUser(e){
+        e.preventDefault();
         let isValid = true;
         if (password !== repeatPass){
             isValid = false;
@@ -14,9 +15,8 @@ const Register = (props) => {
 
         if(isValid){
             const salt = bcrypt.genSaltSync(10);
-            const passHash = bcrypt.hashSync(password, salt)
-            const passHash2 = bcrypt.hashSync(passHash, salt)
-            e.preventDefault();
+            const passHash = bcrypt.hashSync(password, salt);
+            const passHash2 = bcrypt.hashSync(passHash, salt);
             const requestOptions = {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -34,12 +34,12 @@ const Register = (props) => {
     
 
   return (
-    <div>
-        <form onSubmit={(e)=>{registerUser(e)}}>
+    <div className='authPage'>
+        <form onSubmit={(e)=>{registerUser(e)}} className="authForm">
             <input type="text" placeholder='Vartotojo vardas' onChange={(e)=>{setUsername(e.target.value)}} value={username} required></input>
             <input type="password" placeholder='Slaptažodis' onChange={(e)=>{setPassword(e.target.value)}} value={password} required></input>
             <input type="password" placeholder='Pakartoti slaptažodį' onChange={(e)=>{setRepeatPass(e.target.value)}} value={repeatPass} required></input>
-            <input type="submit" value="Registruotis"></input>
+            <input type="submit" className='roundedBtn' value="Registruotis"></input>
         </form>
     </div>
   )

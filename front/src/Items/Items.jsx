@@ -21,11 +21,15 @@ const Items = (props) => {
     <div className='itemFullList'>
         {menuItems.map((item)=>(
             <div className='foodItem'>
-                <div>{item.name}</div>
-                <div>{item.price}€</div>
-                <div>{item.placeId}</div>
-                {props.menuType === "all" && <div>{item.menu}</div>}
-                <div><button onClick={(e)=>{props.singularItem(item)}}>Užsisakyti</button></div>
+                <div className='foodItemImage'><img src={item.img_url} alt="IMG"/></div>
+                <div className='foodItemName'>{item.name}</div>
+                <div className='foodItemPrice'>{item.price}€</div>
+                <div className='foodItemPlace'>{item.place}</div>
+                {props.menuType === "all" && <div>{item.menu === "breakfast"&& "Pusryčiai"}{item.menu === "lunch"&& "Pietūs"}{item.menu === "breakfast"&& "Vakarienė"}</div>}
+                <div className='foodItemOuterOrderBtn'>
+                  <button onClick={()=>{props.addToCart(item)}} className="foodItemOrderBtn">Į krepšelį</button>
+                  <button onClick={(e)=>{props.singularItem(item)}} className="foodItemOrderBtn">Užsisakyti</button>
+                </div>
             </div>
         ))}
     </div>

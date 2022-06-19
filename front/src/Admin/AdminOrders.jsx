@@ -53,7 +53,7 @@ const AdminOrders = () => {
                 <div className='adminOrdersUserItems'>
                     {order.items.map((item)=>(
                         <div className='adminOrdersUserSingleItem'>
-                        <div className='adminOrdersUserSingleItemName'>{item.name}</div>
+                        <div className='adminOrdersUserSingleItemName'>{item.name} X {item.count}</div>
                         <div className='adminOrdersUserSingleItemPrice'>{item.price}€</div>
                         </div>
                     ))}</div>

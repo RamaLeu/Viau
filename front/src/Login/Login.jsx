@@ -29,14 +29,16 @@ const Login = (props) => {
             });
     }
   return (
-    <div>
-        <form onSubmit={(e)=>{loginUser(e)}}>
+    <div className='authPage'>
+        <form onSubmit={(e)=>{loginUser(e)}} className="authForm">
             <input type="text" placeholder='Vartotojo vardas' onChange={(e)=>{setUsername(e.target.value)}} value={username} required></input>
             <input type="password" placeholder='Slaptažodis' onChange={(e)=>{setPassword(e.target.value)}} value={password} required></input>
-            <input type="checkbox" onChange={()=>{setRememberMe(!rememberMe)}} id="rememberMe" name="rememberMe"></input>
+            <div className='rememberLine'>
             <label for="rememberMe">Atsiminti mane</label>
-
-            <input type="submit" value="Prisijungti"></input>
+            <input type="checkbox" onChange={()=>{setRememberMe(!rememberMe)}} id="rememberMe" name="rememberMe"></input>
+            </div>
+            
+            <input type="submit" className='roundedBtn' value="Prisijungti"></input>
         </form>
     </div>
   )

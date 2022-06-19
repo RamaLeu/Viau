@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import './Places.css';
 
-const Places = () => {
+const Places = (props) => {
     let [places ,setPlaces] = useState([]);
     let [isLoading, setIsLoading] = useState(true);
 
@@ -23,13 +23,17 @@ const Places = () => {
 
     }
   return (
-    <div>
+    <div className='placesPage'>
         {!isLoading&&
         places.map((place)=>(
             <div className='placesSinglePlace'>
+                <div className='placesSingleImage'>
+                    <img src={place.imgUrl}></img>
+                </div>
                 <div className='placesSingleName'>{place.name}</div>
                 <div className='placesSingleAdress'>{place.adress}</div>
                 <div className='placesSingleRating'>{rating(place.rating)}</div>
+                <button className='placesSingleButton' onClick={()=>{props.singlePlace(place)}}>Peržiurėti meniu</button>
             </div>
         ))}
     </div>

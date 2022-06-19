@@ -1,38 +1,100 @@
+
 .homePage{
     display: flex;
+    width: 100%;
 }
 .homeSidebar{
     width: 20%;
     min-height: 100vh;
     box-sizing: border-box;
-    border: 1px solid red;
     display: flex;
     flex-direction: row;
+    border-right: 1px solid #9cafb7;
 }
 .homeMain{
     width: 80%;
-    border: 1px solid red;
 }
 .homeSidebarLeft{
-    width: 90%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.homeSidebarLeft>div{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5%;
+}
+.sidebarTitle{
+    font-size: 2em;
+    font-weight: 800;
+    color: #230007;
 }
 .homeSidebarRight{
     width: 10%;
 }
 
 .homeSidebarBtn{
-    width: 100%;
+    width: 80%;
 }
 .homeSidebarBtn button{
     width: 100%;
     box-sizing: border-box;
+    color: #230007;
+    font-weight: 600;
+    background-color: #9cafb7;
+    margin-bottom: 4%;
     padding: 3%;
     text-decoration: none;
     border: none;
+    border-radius: 6px;
 }
 .homeSidebarCartBtn{
-    width: 100%;
+    position: absolute;
+    width: 5%;
+    right: 0%;
 }
+
+.homeSidebarCartBtnBiggened{
+    position: absolute;
+    width: 5%;
+    right: 0%;
+    animation-name: addToCart;
+    animation-duration: 1s;
+}
+
+@keyframes addToCart{
+    0% {width: 5%;}
+    50% {width: 7%;}
+    100% {width: 5%;}
+}
+.homeSidebarCartBtnBiggened button{
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 30%;
+    text-decoration: none;
+    border: none;
+    background-color: #230007;
+    color:#34ad55;
+    border-bottom-left-radius: 50%;
+    font-size: 1.2em;
+    font-weight: 600;
+}
+.homeSidebarCartBtnBiggened button:hover{
+    background-color: #a7754d;
+    border: none;
+    cursor: pointer;
+}
+.homeSidebarCartBtnBiggened button:hover{
+    background-color: #a7754d;
+    border: none;
+    cursor: pointer;
+}
+
 .homeSidebarCartBtn button{
     width: 100%;
     height: 100%;
@@ -40,15 +102,17 @@
     padding: 30%;
     text-decoration: none;
     border: none;
-    background-color: #efefef;
+    background-color: #9cafb7;
+    color:#230007;
+    border-bottom-left-radius: 50%;
 }
 .homeSidebarCartBtn button:hover{
-    background-color: antiquewhite;
+    background-color: #a7754d;
     border: none;
     cursor: pointer;
 }
 .homeSidebarBtn button:hover{
-    background-color: antiquewhite;
+    background-color: #a7754d;
     border: none;
     cursor: pointer;
 }

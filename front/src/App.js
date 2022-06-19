@@ -44,11 +44,14 @@ function App() {
   return (
     <div className="App">
       <Router>
-      <div>
+      <div className='Main'>
         {!currentUser &&
-        <nav>
+        <nav className='MainNav'>
+          <span className='MainTitle'>VIAU</span>
+          <div className='NavBtns'>
           <Link to="/Register">Registruotis</Link>
           <Link to="/Login">Prisijungti</Link>
+          </div>
         </nav>}
         <Routes>
           <Route path="/" element={currentUser ? <Home setCurrentUser={setCurrentUser} logout={logout}/>: <Navigate to="/Login"/>}></Route>
